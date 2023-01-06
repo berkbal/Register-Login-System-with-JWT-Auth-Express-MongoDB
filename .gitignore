@@ -1,1 +1,4 @@
 node_modules
+db/data
+db/init-mongo.js
+db/logs

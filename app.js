@@ -19,32 +19,40 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
 
-// Routes
-const adminRoute = require("./routes/adminRoute.js");
-const router = express.Router();
-require('./routes/adminRoute')(app);
+// MongoDB
 
+const mongoose = require("mongoose");
+const dbURI = "mongodb://root:example@127.0.0.1:27017/user";
+mongoose.set("strictQuery", false);
+mongoose.connect(dbURI, () => {
+    console.log("Mongoose Connected!")
+})
+
+// Routes
+const adminRoute = require("./routes/Routes.js");
+
+const router = express.Router();
+require('./routes/Routes')(app);
 
 app.get('/', (req,res,next) =>{
     res.render(path.join(__dirname, 'views/index.html'));
 });
 
-app.get('/hello-world', (req,res,next) => {
-    exec("./script.sh", (error,stdout,stderr) => {
-        console.log(stdout);
-        next(res.render(path.join(__dirname, 'views/index.html')))
-    })
+app.get('/register', (req,res,next) => {
+    res.render(path.join(__dirname, 'views/register.html'))
 })
+//app.get('/hello-world', (req,res,next) => {
+//    exec("./script.sh", (error,stdout,stderr) => {
+//        console.log(stdout);
+//        next(res.render(path.join(__dirname, 'views/index.html')))
+//    })
+//})
 
-app.post('/hello-world', (req,res,next) => {
-    const input = req.body.input; // Burada bir degiskene almadan frontend'den gelen data ile islem yapilamiyor.
-    console.log(input)
-    next(res.render(path.join(__dirname, 'views/index.html')))
-})
-
-//app.use('/admin', adminRoute);
-//router.get('/admin', adminRoute)
-
+//app.post('/hello-world', (req,res,next) => {
+//    const input = req.body.input; // Burada bir degiskene almadan frontend'den gelen data ile islem yapilamiyor.
+//    console.log(input)
+//    next(res.render(path.join(__dirname, 'views/index.html')))
+//})
 app.listen(port, ()=>{
     console.log(`Server is Running at: 7777`)
 })
