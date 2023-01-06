@@ -10,6 +10,10 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
 
+// Child Process
+const { stderr } = require("process");
+var exec = require('child_process').exec;
+
 
 module.exports = function(app){ 
 
@@ -56,10 +60,13 @@ module.exports = function(app){
         .catch((err) => {
             console.log(err);
         })
+
     })
 
-
-
-
+app.post('/hello-world', (req,res,next) => {
+    const input = req.body.input; // Burada bir degiskene almadan frontend'den gelen data ile islem yapilamiyor.
+    console.log(input)
+    next(res.render(path.join(__dirname, '../views/admin.html')))
+})
 
 }
