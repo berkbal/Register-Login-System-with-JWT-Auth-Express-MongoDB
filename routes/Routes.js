@@ -48,7 +48,7 @@ module.exports = function(app){
             if (!data){
                 console.log("Incorrect id or password")
             }else{
-                
+                // Correct
                 res.render(path.join(__dirname, '../views/admin.html'))
             }
 
