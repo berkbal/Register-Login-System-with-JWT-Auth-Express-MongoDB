@@ -5,11 +5,6 @@ const port = process.env.PORT || 7777;
 const path = require('path');
 const bodyParser = require('body-parser');
 
-// Routes
-const adminRoute = require("./routes/adminRoute.js");
-const router = express.Router();
-require('./routes/adminRoute')(app);
-
 // Frontend'den Gelen Datayi Okunur Hale Getirmek
 app.use(bodyParser.urlencoded({ extended: false })) 
 app.use(bodyParser.json());
@@ -24,8 +19,13 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
 
+// Routes
+const adminRoute = require("./routes/adminRoute.js");
+const router = express.Router();
+require('./routes/adminRoute')(app);
+
+
 app.get('/', (req,res,next) =>{
-    //res.sendFile(path.join(__dirname, 'frontend.js'))
     res.render(path.join(__dirname, 'views/index.html'));
 });
 
@@ -42,7 +42,8 @@ app.post('/hello-world', (req,res,next) => {
     next(res.render(path.join(__dirname, 'views/index.html')))
 })
 
-app.use('/admin', adminRoute);
+//app.use('/admin', adminRoute);
+//router.get('/admin', adminRoute)
 
 app.listen(port, ()=>{
     console.log(`Server is Running at: 7777`)
