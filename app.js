@@ -6,7 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 // Frontend'den Gelen Datayi Okunur Hale Getirmek
-app.use(bodyParser.urlencoded({ extended: false })) 
+app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(bodyParser.json());
 
 // Child Process
@@ -22,10 +22,12 @@ app.use(express.static('public')) // External JS Favicon vs bu dizinden frontend
 // MongoDB
 
 const mongoose = require("mongoose");
-const dbURI = "mongodb://root:example@127.0.0.1:27017/user";
-mongoose.set("strictQuery", false);
-mongoose.connect(dbURI, () => {
-    console.log("Mongoose Connected!")
+mongoose.connect('mongodb://localhost:27017/admin-ui')
+.then(() => {
+    console.log("[OK]MongoDB connection is successful.")
+})
+.catch((err) => {
+    console.error(err)
 })
 
 // Routes
