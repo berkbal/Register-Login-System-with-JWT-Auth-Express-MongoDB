@@ -5,6 +5,12 @@ const path = require('path');
 
 const mongoose = require("mongoose");
 
+// EJS
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
+
+
 module.exports = function(app){ 
 
         const userSchema = {
@@ -36,7 +42,24 @@ module.exports = function(app){
     app.post("/auth/login", (req,res,next) => {
         const id = req.body.id
         const pw = req.body.pw
-        console.log(id,pw)
+
+        User.findOne({id, pw})
+        .then((data)=> {
+            if (!data){
+                console.log("Incorrect id or password")
+            }else{
+                
+                res.render(path.join(__dirname, '../views/admin.html'))
+            }
+
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     })
+
+
+
+
 
 }
