@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 7777;
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
+
 
 // Frontend'den Gelen Datayi Okunur Hale Getirmek
 app.use(bodyParser.urlencoded({ extended: true })) 
@@ -16,6 +18,7 @@ var exec = require('child_process').exec;
 app.set('view engine', 'ejs');
 //app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
+app.use(cookieParser());
 
 // MongoDB
 
@@ -35,9 +38,21 @@ app.get("/", (req,res,next) => {
 // cookies
 
 app.get("/set-cookies", (req,res,next) => {
-    res.setHeader("Set-Cookie", 'newUser=true');
+    //res.setHeader("Set-Cookie", 'newUser=true');
+    res.cookie("newUser", false, {
+        httpOnly: true,
+
+    })
 
     res.send("You got the cookies!")
+})
+
+app.get("/read-cookies", (req,res,next) => {
+
+    const cookies = req.cookies;
+    console.log(cookies)
+
+    res.json(cookies)
 })
 
 app.listen(port, () => {
