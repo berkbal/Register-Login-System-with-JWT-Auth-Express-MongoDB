@@ -6,19 +6,20 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 
 
-// Frontend'den Gelen Datayi Okunur Hale Getirmek
-app.use(bodyParser.urlencoded({ extended: true })) 
-app.use(bodyParser.json());
-
 // Child Process
 const { stderr } = require("process");
 var exec = require('child_process').exec;
 
-// EJS
+// Middlewares
 app.set('view engine', 'ejs');
 //app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
 app.use(cookieParser());
+
+// Frontend'den Gelen Datayi Okunur Hale Getirmek
+app.use(bodyParser.urlencoded({ extended: true })) 
+app.use(bodyParser.json());
+
 
 // MongoDB
 
@@ -37,23 +38,6 @@ app.get("/", (req,res,next) => {
 
 // cookies
 
-app.get("/set-cookies", (req,res,next) => {
-    //res.setHeader("Set-Cookie", 'newUser=true');
-    res.cookie("newUser", false, {
-        httpOnly: true,
-
-    })
-
-    res.send("You got the cookies!")
-})
-
-app.get("/read-cookies", (req,res,next) => {
-
-    const cookies = req.cookies;
-    console.log(cookies)
-
-    res.json(cookies)
-})
 
 app.listen(port, () => {
     console.log("App is running at port: " +port)

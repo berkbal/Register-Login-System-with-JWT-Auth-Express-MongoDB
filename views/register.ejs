@@ -21,13 +21,22 @@
 
         const form = document.getElementById("register-form")
 
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const userId = form.userId.value;
             const pw = form.pw.value;
+            
+            try {
+                const res = await fetch('/register', {
+                    method: 'POST',
+                    body: JSON.stringify({ userId, pw}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+            }
+            catch {
 
-            console.log(userId,pw)
+            }
         })
 
     </script>
