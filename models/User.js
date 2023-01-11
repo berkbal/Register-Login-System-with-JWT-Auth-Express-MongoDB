@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
     userId: {
         type: String,
@@ -16,16 +16,20 @@ const userSchema = new mongoose.Schema({
 
 // Hooks
 
+userSchema.pre("save", async function(next) { // Fire a function before save function
+    const salt = await bcrypt.genSalt();
+    this.pw = await bcrypt.hash(this.pw, salt)
+
+    next();
+})
+
 userSchema.post("save", function(doc, next) { // Fire a function after save function
     console.log("new user was created and saved.", doc);
 
     next();
 })
 
-userSchema.pre("save", function(next) { // Fire a function before save function
-    console.log('user about to be created and saved.', this)
-    next();
-})
+
 
 const User = mongoose.model('user', userSchema);
 

@@ -32,6 +32,14 @@ app.get("/", (req,res,next) => {
     res.render("home")
 })
 
+// cookies
+
+app.get("/set-cookies", (req,res,next) => {
+    res.setHeader("Set-Cookie", 'newUser=true');
+
+    res.send("You got the cookies!")
+})
+
 app.listen(port, () => {
     console.log("App is running at port: " +port)
 })

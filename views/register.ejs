@@ -11,11 +11,26 @@
     <div class="form">
     <form method="post" action="register" id="register-form">
           <label for="id">ID</label>
-          <input type="text" name="id"/>
+          <input type="text" name="userId"/>
           <label for="pw">PW</label>
           <input type="password" name="pw"/><br>
           <button type="submit">Register</button>
     </form>
+
+    <script>
+
+        const form = document.getElementById("register-form")
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const userId = form.userId.value;
+            const pw = form.pw.value;
+
+            console.log(userId,pw)
+        })
+
+    </script>
     </div>
 </div>
 </body>
