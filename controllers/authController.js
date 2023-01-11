@@ -7,7 +7,7 @@ module.exports.register_get = (req,res,next) => {
 module.exports.register_post = async (req,res,next) => {
     const { userId, pw } = req.body
     console.log(userId, pw)
-
+    
     try {
         const user = await User.create({userId, pw});
         res.status(201).json(user)
@@ -23,7 +23,5 @@ module.exports.login_get = (req,res,next) => {
 }
 
 module.exports.login_post = async (req,res,next) => {
-    const { userId, pw } = req.body
-    console.log(userId, pw)
 
 }
