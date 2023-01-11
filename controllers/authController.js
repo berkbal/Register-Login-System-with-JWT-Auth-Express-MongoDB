@@ -4,8 +4,8 @@ module.exports.register_get = (req,res,next) => {
 }
 
 module.exports.register_post = (req,res,next) => {
-//    const { id, pw } = req.body
-    console.log(req.body)
+    const { id, pw } = req.body
+    console.log(id, pw)
 }
 
 module.exports.login_get = (req,res,next) => {
@@ -13,5 +13,6 @@ module.exports.login_get = (req,res,next) => {
 }
 
 module.exports.login_post = (req,res,next) => {
-    res.render("login")
+    const { id, pw } = req.body
+    console.log(id, pw)
 }
