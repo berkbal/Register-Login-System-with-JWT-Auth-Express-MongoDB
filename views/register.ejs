@@ -33,6 +33,8 @@
                     body: JSON.stringify({ userId, pw}),
                     headers: {'Content-Type': 'application/json'}
                 })
+                const data = res.json()
+                console.log(data)
             }
             catch {
 

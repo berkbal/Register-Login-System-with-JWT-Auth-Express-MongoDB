@@ -24,9 +24,13 @@ app.use(bodyParser.json());
 // MongoDB
 
 const mongoose = require("mongoose");
-
+mongoose.set('strictQuery', true);
 const dbURI = 'mongodb://localhost:27017/admin-ui';
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        autoIndex: true
+});
 
 // Routes
 const authRoute = require("./routes/authRoutes.js")

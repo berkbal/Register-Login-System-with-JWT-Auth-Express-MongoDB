@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+
 const userSchema = new mongoose.Schema({
     userId: {
         type: String,
-        required: true,
-        lowercase: true
+        required: [true, "Please enter an id."],
+        unique: true,
     },
 
     pw: {
         type: String,
-        required: true,
-        minlenght: 6
+        required: [true, "Please enter a password."],
+        minlenght: [6, "Minimum password length is 6 characters."]
     }
+
+
 })
 
 // Hooks
