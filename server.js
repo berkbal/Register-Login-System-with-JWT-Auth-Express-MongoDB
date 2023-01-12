@@ -29,7 +29,8 @@ const dbURI = 'mongodb://localhost:27017/admin-ui';
 mongoose.connect(dbURI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
-        autoIndex: true
+        autoIndex: true,
+        useCreateIndex: true
 });
 
 // Routes
