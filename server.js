@@ -30,7 +30,6 @@ mongoose.connect(dbURI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
         autoIndex: true,
-        useCreateIndex: true
 });
 
 // Routes
