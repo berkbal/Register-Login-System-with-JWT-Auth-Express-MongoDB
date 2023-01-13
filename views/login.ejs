@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="admin.css">
+        <link rel="stylesheet" href="style.css">
     <style>
 
     </style>
 </head>
 <body>
-    <h1>Login</h1>
 
+        <!-- (A) SIDEBAR -->
+    <div id="pgside">
+      <!-- (A1) BRANDING OR USER -->
+      <!-- LINK TO DASHBOARD OR LOGOUT -->
+      <div id="pguser">
+        <img src="logo.png"/>
+        <i class="txt">Admin</i>
+      </div>
+
+      <!-- (A2) MENU ITEMS -->
+      <a href="/register" class="current">
+        <i class="ico">&#9733;</i>
+        <i class="txt">Register</i>
+      </a>
+      <a href="/login">
+        <i class="ico">&#9728;</i>
+        <i class="txt">Login</i>
+      </a>
+    </div>
+
+   <main id="pgmain">
     <div class="content" align="center">
         <img src="logo.png" height="300" width="300"/>
     <div class="form">
@@ -20,8 +41,10 @@
           <input type="password" name="pw"/><br>
           <button type="submit">Login</button>
     </form>
-    </div>
-    <script>
+</main>
+ 
+
+   <script>
         const form = document.getElementById("login-form")
 
         form.addEventListener("submit", async (e) => {

@@ -37,6 +37,9 @@ const authRoute = require("./routes/authRoutes.js");
 //const { requireAuthJwt } = require("./middleware/authMiddleware.js");
 
 app.get("/", (req,res,next) => {
+    if (requireAuthJwt){
+        res.render("admin")
+    }
     res.render("home")
 })
 

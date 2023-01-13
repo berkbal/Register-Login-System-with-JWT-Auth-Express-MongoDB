@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Admin</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="admin.css">
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
   </head>
   <body>
-    <!-- (A) SIDEBAR -->
+        <!-- (A) SIDEBAR -->
     <div id="pgside">
       <!-- (A1) BRANDING OR USER -->
       <!-- LINK TO DASHBOARD OR LOGOUT -->
-      <div id="pguser">
-        <img src="logo.png"/>
+      <div id="pguser"><img src="logo.png"/>
         <i class="txt">Admin</i>
       </div>
 
       <!-- (A2) MENU ITEMS -->
-      <a href="#" class="current">
+      <a href="/register" class="current">
         <i class="ico">&#9733;</i>
-        <i class="txt">Sunucu Ayarları</i>
+        <i class="txt">Machine Settings</i>
       </a>
-      <a href="#">
+      <a href="/login">
         <i class="ico">&#9728;</i>
-        <i class="txt">Section B</i>
-      </a>
-      <a href="#">
-        <i class="ico">&#9737;</i>
-        <i class="txt">Section C</i>
+        <i class="txt">Login</i>
       </a>
     </div>
 
+
+ 
     <!-- (B) MAIN -->
     <main id="pgmain">
     <form method="post" action="hello-world" id="form">
@@ -41,6 +38,5 @@
 
 
     </main>
-    <script src="../routes/Routes.js"></script>
   </body>
 </html>

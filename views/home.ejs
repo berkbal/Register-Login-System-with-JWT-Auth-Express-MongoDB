@@ -2,46 +2,31 @@
 <html lang="en">
 <head>
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <h1>Main Page</h1>
-    <ul>
-        <li>
-            <a href="/login">Login</a>
-        </li>
-        <li>
-            <a href="/register">Register</a>
-        </li>
-    </ul>
-    <!--
+    <!-- (A) SIDEBAR -->
+    <div id="pgside">
+      <!-- (A1) BRANDING OR USER -->
+      <!-- LINK TO DASHBOARD OR LOGOUT -->
+      <div id="pguser">
+        <img src="logo.png"/>
+        <i class="txt">Admin</i>
+      </div>
 
-    <div class="content" align="center">
-        <img src="logo.png" height="300" width="300"/>
-    <div class="form">
-    <form method="post" action="auth/login" id="login-form">
-          <label for="id">ID</label>
-          <input type="text" name="id"/>
-          <label for="pw">PW</label>
-          <input type="password" name="pw"/><br>
-          <button type="submit">Login</button>
-    </form>
+      <!-- (A2) MENU ITEMS -->
+      <a href="/register" class="current">
+        <i class="ico">&#9733;</i>
+        <i class="txt">Register</i>
+      </a>
+      <a href="/login">
+        <i class="ico">&#9728;</i>
+        <i class="txt">Login</i>
+      </a>
     </div>
-!-->
-    <!--
-    <form method="post" action="hello-world" id="form">
-        <p>Html Butonunun "name" valuesu olmak zorunda!</p>
-        <input type="text" name="input">
-        <button type="submit">hello-world</button>
-    </form>
 
-    <script src="frontend.js"></script>
-    -->
-
-
-    </div>
-</body>
+    <!-- (B) MAIN -->
+    <main id="pgmain">
+    </main>
+  </body>
 </html>
