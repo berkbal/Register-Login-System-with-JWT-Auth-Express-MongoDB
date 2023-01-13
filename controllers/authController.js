@@ -39,7 +39,6 @@ module.exports.register_get = (req,res,next) => {
 
 module.exports.register_post = async (req,res,next) => {
     const { userId, pw } = req.body
-    //console.log(userId, pw)
 
     try {
         const user = await User.create({userId, pw});
@@ -60,5 +59,16 @@ module.exports.login_get = (req,res,next) => {
 }
 
 module.exports.login_post = async (req,res,next) => {
+    const {userId, pw} = req.body;
 
+    try {
+        const user = await User.login(userId,pw)
+        const token = createToken(user._id);
+        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+
+        res.status(200).json({user: user._id})
+    }
+    catch {
+        res.status(400).json({});
+    }
 }

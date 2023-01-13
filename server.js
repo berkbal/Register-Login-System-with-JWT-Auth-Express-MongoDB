@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 7777;
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-
+const {requireAuthJwt} = require("./middleware/authMiddleware.js");
 
 // Child Process
 const { stderr } = require("process");
@@ -33,15 +33,20 @@ mongoose.connect(dbURI, {
 });
 
 // Routes
-const authRoute = require("./routes/authRoutes.js")
-app.use(authRoute)
+const authRoute = require("./routes/authRoutes.js");
+//const { requireAuthJwt } = require("./middleware/authMiddleware.js");
 
 app.get("/", (req,res,next) => {
     res.render("home")
 })
 
-// cookies
+app.get("/admin", requireAuthJwt, (req,res) => {
+    res.render("admin");
+})
 
+app.use(authRoute);
+
+// cookies
 
 app.listen(port, () => {
     console.log("App is running at port: " +port)

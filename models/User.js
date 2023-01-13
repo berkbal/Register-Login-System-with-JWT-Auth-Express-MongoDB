@@ -32,7 +32,21 @@ userSchema.post("save", function(doc, next) { // Fire a function after save func
     next();
 })
 
+// static method to login user
 
+userSchema.statics.login = async function(userId, pw){
+    const user = await this.findOne({userId});
+
+    if (user){
+        const auth = await bcrypt.compare(pw, user.pw); // databasedeki pw value'su ile kullanicinin girdigini karsilastirma
+        if (auth){
+            return user;
+            
+        }
+        throw Error("Incorrect Password");
+    }
+        throw Error('incorrect id');
+}
 
 const User = mongoose.model('user', userSchema);
 

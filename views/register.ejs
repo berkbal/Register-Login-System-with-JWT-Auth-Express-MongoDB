@@ -12,32 +12,44 @@
     <form method="post" action="register" id="register-form">
           <label for="id">ID</label>
           <input type="text" name="userId"/>
+          <div class="id error"></div>
           <label for="pw">PW</label>
           <input type="password" name="pw"/><br>
+          <div class="password error"></div>
           <button type="submit">Register</button>
     </form>
 
     <script>
 
-        const form = document.getElementById("register-form")
+        const form = document.getElementById("register-form");
+        const userIdError = document.querySelector('.id.error');
+        const passwordError = document.querySelector('.password.error');
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            // reset errors
+           
+            userIdError.textContent = ''
+            passwordError.textContent = '' 
             const userId = form.userId.value;
             const pw = form.pw.value;
             
             try {
                 const res = await fetch('/register', {
                     method: 'POST',
-                    body: JSON.stringify({ userId, pw}),
+                    body: JSON.stringify({ userId, pw }),
                     headers: {'Content-Type': 'application/json'}
                 })
-                const data = res.json()
+                const data = await res.json();
                 console.log(data)
+                if (data.errors){
+                    userIdErrorData.textContent = data.errors.userId;
+                    passwordError.textContent = data.errors.pw;
+                }
             }
             catch {
-
+                console.log(err)
             }
         })
 

@@ -21,4 +21,35 @@
           <button type="submit">Login</button>
     </form>
     </div>
+    <script>
+        const form = document.getElementById("login-form")
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const userId = form.userId.value;
+            const pw = form.pw.value;
+            
+        try{
+
+            const res = await fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({ userId, pw }),
+                headers: {'Content-Type': 'application/json'}
+            });
+            
+            const data = await res.json();
+            console.log(data);
+
+            if(data.user){
+                location.assign("/admin")
+            }
+        }
+        catch{
+            //console.log(err);
+        }
+
+        })
+
+    </script>
 </body>
