@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 7777;
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const { requireAuth } = require("./middleware/authMiddleware");
+const { requireAuth, checkUser } = require("./middleware/authMiddleware");
 
 // Middlewares
 app.set('view engine', 'ejs');
@@ -31,6 +31,9 @@ mongoose.connect(dbURI, {
         autoIndex: true,
 });
 
+//routes
+
+app.get('*', checkUser);
 app.get("/", (req,res) => res.render("home"));
 app.get("/admin", requireAuth, (req,res) => res.render("admin"));
 app.use(authRoute);
