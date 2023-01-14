@@ -3,8 +3,6 @@
   <head>
     <title>Admin Panel</title>
     <link rel="stylesheet" href="admin.css">
-    <meta name="robots" content="noindex" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
   </head>
   <body>
         <!-- (A) SIDEBAR -->
@@ -16,26 +14,27 @@
       </div>
 
       <!-- (A2) MENU ITEMS -->
-      <a href="/register" class="current">
+      <a href="#" class="current">
         <i class="ico">&#9733;</i>
         <i class="txt">Machine Settings</i>
       </a>
-      <a href="/login">
-        <i class="ico">&#9728;</i>
-        <i class="txt">Login</i>
+      <a href="logout">
+        <i class="ico">&#8677;</i>
+        <i class="fa-solid fa-right-from-bracket">Log Out</i>
+        </i>
       </a>
     </div>
-
-
  
     <!-- (B) MAIN -->
     <main id="pgmain">
-    <form method="post" action="hello-world" id="form">
-        <p>Html Butonunun "name" valuesu olmak zorunda!</p>
-        <input type="text" name="input">
-        <button type="submit">Write to Console</button>
+      <div class="content">
+        <form method="post" action="/hostname">
+        <label for="hostname">Hostname: </label>
+          <input type="text" placeholder="hostname" id="hostname"/>
+          <input type="button" value="Submit">
+        </form>
+      </div>
     </form>
-
 
     </main>
   </body>

@@ -4,15 +4,10 @@ const app = express();
 const port = process.env.PORT || 7777;
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const {requireAuthJwt} = require("./middleware/authMiddleware.js");
-
-// Child Process
-const { stderr } = require("process");
-var exec = require('child_process').exec;
+const { requireAuth } = require("./middleware/authMiddleware");
 
 // Middlewares
 app.set('view engine', 'ejs');
-//app.engine('html', require('ejs').renderFile);
 app.use(express.static('public')) // External JS Favicon vs bu dizinden frontende gider
 app.use(cookieParser());
 
@@ -20,10 +15,14 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(bodyParser.json());
 
+// Routes
+const authRoute = require("./routes/authRoutes.js");
 
 // MongoDB
 
 const mongoose = require("mongoose");
+const { JsonWebTokenError } = require("jsonwebtoken");
+
 mongoose.set('strictQuery', true);
 const dbURI = 'mongodb://localhost:27017/admin-ui';
 mongoose.connect(dbURI, {
@@ -32,25 +31,10 @@ mongoose.connect(dbURI, {
         autoIndex: true,
 });
 
-// Routes
-const authRoute = require("./routes/authRoutes.js");
-//const { requireAuthJwt } = require("./middleware/authMiddleware.js");
-
-app.get("/", (req,res,next) => {
-    if (requireAuthJwt){
-        res.render("admin")
-    }
-    res.render("home")
-})
-
-app.get("/admin", requireAuthJwt, (req,res) => {
-    res.render("admin");
-})
-
+app.get("/", (req,res) => res.render("home"));
+app.get("/admin", requireAuth, (req,res) => res.render("admin"));
 app.use(authRoute);
 
-// cookies
-
 app.listen(port, () => {
-    console.log("App is running at port: " +port)
+    console.log("App is running at port: ", port)
 })
