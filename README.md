@@ -6,6 +6,8 @@ Register Login System Example with JWT Auth (Expressjs - mongoDB)
 - ``` npm install ```
 - ``` cd db ```
 - ``` docker-compose up -d ```
+- ``` cd .. ```
+- ``` npm install -G nodemon ```
 - ``` npm run dev ```
 
-Registered users stored to mongoDB on local machine.
+Registered users stored to mongoDB on docker container.
